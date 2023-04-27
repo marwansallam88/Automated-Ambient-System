@@ -1,0 +1,56 @@
+[System]
+Name='FuzzyAdvanced'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=15
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Temperature'
+Range=[0 45]
+NumMFs=5
+MF1='Too Cold':'trapmf',[-100000 5 5 10]
+MF2='Cold':'trapmf',[5 10 15 20]
+MF3='Warm':'trapmf',[15 20 25 30]
+MF4='Hot':'trapmf',[25 30 35 40]
+MF5='Too Hot':'trapmf',[35 40 40 100000]
+
+[Input2]
+Name='Humidity'
+Range=[0 1]
+NumMFs=3
+MF1='Dry':'trapmf',[-10000 0.1 0.2 0.3]
+MF2='Suitable':'trapmf',[0.2 0.3 0.6 0.7]
+MF3='Wet':'trapmf',[0.6 0.7 0.9 100000]
+
+[Output1]
+Name='AC Compressor Speed Percentage'
+Range=[0 1]
+NumMFs=4
+MF1='Off':'trapmf',[-1000 0 0 0.1]
+MF2='Low':'trapmf',[0 0.1 0.2 0.3]
+MF3='Medium':'trapmf',[0.2 0.3 0.5 0.6]
+MF4='High':'trapmf',[0.5 0.6 0.9 1]
+
+[Rules]
+1 1, 1 (1) : 1
+1 2, 1 (1) : 1
+2 1, 2 (1) : 1
+2 2, 1 (1) : 1
+3 1, 3 (1) : 1
+3 2, 3 (1) : 1
+4 1, 3 (1) : 1
+4 2, 3 (1) : 1
+4 3, 4 (1) : 1
+5 1, 3 (1) : 1
+5 2, 4 (1) : 1
+5 3, 4 (1) : 1
+3 3, 3 (1) : 1
+1 3, 2 (1) : 1
+2 3, 3 (1) : 1
